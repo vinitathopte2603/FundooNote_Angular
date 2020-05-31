@@ -1,0 +1,24 @@
+<div style="margin-top: 20px; margin-left: 50px; width: 96%;" fxLayout="row wrap" fxLayoutGap="10px"
+  fxLayoutAlign="start center" fxLayoutAlign.xs="center center">
+  <div fxFlex='280px' fxFlex.xs='100' *ngFor="let items of notes">
+    <mat-card style="margin-top: 10px;" fxFlex="100%" [style.backgroundColor]='items.color'>
+      <form>
+        <mat-card-content (click)=EditNote(items)>
+
+          <div *ngIf="items.image!=null">
+            <img style="width: 100%;" src="{{items.image}}">
+          </div>
+          <div>
+            {{items.title}}
+          </div>
+          <div>
+            {{items.description}}
+          </div>
+        </mat-card-content>
+      </form>
+      <div>
+        <app-icons [isTrash]="isTrash" [isArchive]="isArchive" [noteData]="items"></app-icons>
+      </div>
+    </mat-card>
+  </div>
+</div>

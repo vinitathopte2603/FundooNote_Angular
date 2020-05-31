@@ -1,0 +1,115 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+  <mat-toolbar class="example-toolbar" class="example-toolbar" style="height: 65px;">
+
+    <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1 class="example-app-name">Keep</h1>
+
+    <div class="search" fxLayoutAlign="start center" fxFlex="50%" fxHide.xs="true">
+      <mat-icon matPrefix style="margin-left: 10px;" style="color: black; padding: 15px;">search</mat-icon>
+      <mat-form-field appearance="none" fxFlex="85%">
+        <input matInput placeholder="search" style="color: black; margin-top: 5px;" type="text" [(ngModel)]="value">
+      </mat-form-field>
+      <div fxLayoutAlign="end center" style="margin-right: 10px;">
+        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+          <mat-icon style="color: black;">close</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end center">
+      <div>
+        <button mat-icon-button>
+          <mat-icon>refresh</mat-icon>
+        </button>
+        <button mat-icon-button *ngIf="status" (click)="status=!status">
+          <mat-icon>grid_on</mat-icon>
+        </button>
+        <button mat-icon-button *ngIf="!status" (click)="status=!status">
+          <mat-icon appearance="outline">view_agenda</mat-icon>
+        </button>
+        <button mat-icon-button>
+          <mat-icon>settings</mat-icon>
+        </button>
+      </div>
+
+      <div fxLayout="row">
+        <button mat-icon-button>
+          <mat-icon>apps</mat-icon>
+        </button>
+        <div mat-card-avatar class="example-header-image" [matMenuTriggerFor]="menu"></div>
+        <div>
+          <mat-menu #menu="matMenu" xPosition="before">
+            <div fxLayout="column" fxLayoutAlign="center center" style="height: 250px; width: 280px;">
+              <div mat-card-avatar class="example-header-image1"></div>
+              <button mat-icon-button (click)="ProfilePicture()">
+                <mat-icon>add_a_photo</mat-icon>
+              </button>
+
+
+              <div fxLayout="column" fxLayoutAlign="center center">
+
+                <p>{{this.fullName}}</p>
+                <p>
+                  {{this.email}}
+                </p>
+
+                <button mat-raised-button (click)=Logout()>Logout</button>
+              </div>
+            </div>
+
+
+          </mat-menu>
+        </div>
+
+      </div>
+    </div>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56">
+      <mat-nav-list style="max-width: 100%; overflow: hidden; width: 210px;">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon matListIcon style="padding:10px 20px;">lightbulb_outline</mat-icon>
+          <a mat-list-item routerLink="home" disableRipple="true"
+            style="border-bottom-right-radius: 20px; border-top-right-radius: 20px;">Notes</a>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon matListIcon style="padding:10px 20px;">notifications_none</mat-icon>
+          <a mat-list-item routerLink="reminder" disableRipple="true"
+            style="border-bottom-right-radius: 20px; border-top-right-radius: 20px;">Reminders</a>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center" *ngFor="let data of labels">
+          <mat-icon matListIcon style="padding:10px 20px;">label_outline</mat-icon>
+          <a mat-list-item routerLink="reminder" disableRipple="true" 
+            style="border-bottom-right-radius: 20px; border-top-right-radius: 20px;">{{data.label}}</a>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon matListIcon style="padding:10px 20px;">editoutlinedicon</mat-icon>
+          <a mat-list-item routerLink="home" disableRipple="true"  (click)=EditLabel(labels)
+            style="border-bottom-right-radius: 20px; border-top-right-radius: 20px;">Edit labels</a>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon matListIcon style="padding:10px 20px;">archive</mat-icon>
+          <a mat-list-item routerLink="archive" disableRipple="true"
+            style="border-bottom-right-radius: 20px; border-top-right-radius: 20px;">Archive</a>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon matListIcon style="padding:10px 20px;">delete</mat-icon>
+          <a mat-list-item routerLink="trash" disableRipple="true"
+            style="border-bottom-right-radius: 20px; border-top-right-radius: 20px;">Trash</a>
+        </div>
+
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

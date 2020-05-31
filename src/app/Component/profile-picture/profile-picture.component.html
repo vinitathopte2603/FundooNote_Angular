@@ -1,0 +1,30 @@
+<h1>Select Profile Image</h1>
+<div>
+
+        <div>
+            <button mat-button mat-icon-button matTooltip="Add image">
+            <mat-icon class="icons" (click)="file.click()">
+                crop_original
+            </mat-icon>
+          
+            <input type="file" #file style="display:none;" name="imageFile" (change)="fileChangeEvent($event)" />
+        </button>
+        </div>
+        <div>
+      
+
+        <image-cropper
+        [imageChangedEvent]="imageChangedEvent"
+        [maintainAspectRatio]="true"
+        [aspectRatio]="4 / 4"
+        [resizeToWidth]="128"
+        format="png"
+        (imageCropped)="imageCropped($event)"
+       
+      ></image-cropper>
+        </div>
+        <div>
+            <button (click)="setProfilePicture()">set as profile picture</button>
+        </div>
+
+</div>

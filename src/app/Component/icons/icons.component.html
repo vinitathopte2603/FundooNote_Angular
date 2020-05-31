@@ -1,0 +1,61 @@
+<div *ngIf="isTrash == 'false'">
+    <button mat-button mat-icon-button matTooltip="Remind me">
+        <mat-icon class="icons">
+            add_alert
+        </mat-icon>
+    </button>
+
+    <button mat-button mat-icon-button matTooltip="Collaborator" (click)="Collab()">
+        <mat-icon class="icons">
+            person_add
+        </mat-icon>
+    </button>
+
+    <button mat-button mat-icon-button matTooltip="Change color" [matMenuTriggerFor]="colormenu">
+        <mat-icon class="icons">
+            color_lens
+        </mat-icon>
+    </button>
+    <mat-menu #colormenu="matMenu" yPosition="above">
+        <div style="width: 160px;">
+            <button mat-mini-fab *ngFor="let color of colorsArray" [style.backgroundColor]='color'
+                (click)=changeColor(color)></button>
+        </div>
+    </mat-menu>
+
+    <button mat-button mat-icon-button matTooltip="Add image">
+        <mat-icon class="icons" (click)="file.click()">
+            crop_original
+        </mat-icon>
+        <input type="file" #file style="display:none;" name="file" (change)="AddImage($event)">
+    </button>
+
+    <button mat-button *ngIf="isArchive == 'false'" mat-icon-button matTooltip="Archive" (click)=ArchiveNote()>
+        <mat-icon class="icons">
+            archive
+        </mat-icon>
+    </button>
+
+    <button mat-button mat-icon-button matTooltip="Unarchive" *ngIf="isArchive == 'true'" (click)=ArchiveNote()>
+        <mat-icon class="icons">
+            unarchive
+        </mat-icon>
+    </button>
+
+    <button mat-button mat-icon-button matTooltip="More" [matMenuTriggerFor]="menu">
+        <mat-icon class="icons">more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)=moveToTrash()>Delete note</button>
+        <button mat-menu-item>Add label</button>
+    </mat-menu>
+</div>
+<div *ngIf="isTrash == 'true'">
+    <button mat-button mat-icon-button matTooltip="Delete forever" (click)=DeleteNote()>
+        <mat-icon class="icons">delete_forever</mat-icon>
+    </button>
+
+    <button mat-button mat-icon-button matTooltip="Restore" (click)=moveToTrash()>
+        <mat-icon class="icons">restore_from_trash</mat-icon>
+    </button>
+</div>

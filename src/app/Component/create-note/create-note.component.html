@@ -1,0 +1,24 @@
+<div style="margin-top: 20px; width: 100%;" fxLayout="row" fxLayoutAlign="center center" fxLayout.xs="column">
+    <mat-card fxFlex="45%" flex-wrap: wrap fxFlex.xs="95%">
+        <form [formGroup]="note">
+            <mat-card-content>
+                <div >
+
+
+                    <input matInput placeholder="Title" name="title" formControlName="title" class="inputbase">
+                </div>
+                <div >
+
+
+                    <input matInput placeholder="Take a note ..." formControlName="description" name="description"
+                        class="inputbase">
+                </div>
+            </mat-card-content>
+            <div class="iconAndButton">
+                <app-icons isTrash=false isArchive=false></app-icons>
+                <button mat-button style="margin: 0 0;" (click)=AddNote()>CLOSE</button>
+            </div>
+
+        </form>
+    </mat-card>
+</div>

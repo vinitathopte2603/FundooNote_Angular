@@ -1,0 +1,4 @@
+<div style="width: 100%;">
+    <app-create-note (addNoteEvent)="addNoteEvent($event)"></app-create-note>
+    <app-display-notes isTrash=false isArchive=false [notes]="allNotes"></app-display-notes>
+</div>

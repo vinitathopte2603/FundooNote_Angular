@@ -1,0 +1,35 @@
+<div>
+  <h1 mat-dialog-title>Edit Label</h1>
+  <div fxLayout="row">
+    <button  mat-button mat-icon-button *ngIf="!label">
+      <mat-icon matPrefix >add</mat-icon>
+    </button>
+    
+    <button mat-button mat-icon-button *ngIf="label">
+      <mat-icon matPrefix >clear</mat-icon>
+    </button>
+   
+    <input matInput placeholder="Create new label" [(ngModel)]="label">
+    <button  mat-button mat-icon-button *ngIf="label">
+      <mat-icon matSuffix class="matmaterialicon" (click)="createLabel()">done</mat-icon>
+    </button>
+    
+  </div>
+
+  <div style="display: flex; flex-direction: row" *ngFor="let labels of data">
+    <button mat-button mat-icon-button (click)="DeleteLabel(labels)">
+      <mat-icon class="icons">
+        delete_outline
+      </mat-icon>
+    </button>
+    <div matTooltip="{{labels.label}}">
+      <input style="padding: 10px;" matInput="text" [(ngModel)]="labels.label" placeholder="{{labels.label}}"> </div>
+
+
+    <button mat-button mat-icon-button (click)="EditLabel(labels)">
+      <mat-icon class="icons">
+        edit
+      </mat-icon>
+    </button>
+  </div>
+</div>

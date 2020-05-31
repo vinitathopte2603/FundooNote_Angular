@@ -1,0 +1,48 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  .example-toolbar {
+    background-color: #ffffff;
+ 
+  }
+  .example-is-mobile .example-toolbar {
+    position: fixed;
+    z-index: 2;
+  }
+  
+  h1.example-app-name {
+    margin-left: 8px;
+  }
+  
+  .example-sidenav-container {
+    flex: 1;
+  }
+  
+  .example-is-mobile .example-sidenav-container {
+    flex: 1 0 auto;
+  }
+  .search{
+    background: #f1f3f4;
+    border: 1px solid transparent;
+    margin-left: 80px;
+    margin-right: 50px;
+    border-radius: 8px;
+    height: 50px;
+  }
+  .example-header-image{
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  
+  }
+  .example-header-image1{
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+    height: 101px;
+    width: 101px;
+  }

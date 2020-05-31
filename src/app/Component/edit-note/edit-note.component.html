@@ -1,0 +1,23 @@
+<div style="margin-top: 20px; width: 100%;" fxLayout="row" fxLayoutAlign="center center" fxLayout.xs="column"
+    [style.backgroundColor]='data.color'>
+
+    <form style="width: 100%;">
+
+        <div>
+            <input matInput placeholder="Title" name="title" class="inputbase" [(ngModel)]="data.title">
+        </div>
+        <div>
+
+
+            <input matInput placeholder="Take a note ..." name="description" [(ngModel)]='data.description'
+                class="inputbase">
+        </div>
+
+        <div class="iconAndButton">
+            <app-icons isTrash=false isArchive=false [noteData]="this.data"></app-icons>
+            <button mat-button style="margin: 0 0;" (click)=editNote()>CLOSE</button>
+        </div>
+
+    </form>
+
+</div>
