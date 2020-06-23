@@ -36,6 +36,11 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { ProfilePictureComponent } from './Component/profile-picture/profile-picture.component';
 import { LabelOperationsComponent } from './Component/label-operations/label-operations.component';
 import { CollaboratorComponent } from './Component/collaborator/collaborator.component';
+import { SearchNoteComponent } from './Component/search-note/search-note.component';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +60,7 @@ import { CollaboratorComponent } from './Component/collaborator/collaborator.com
     ProfilePictureComponent,
     LabelOperationsComponent,
     CollaboratorComponent,
+    SearchNoteComponent,
 
   ],
   imports: [
@@ -78,7 +84,11 @@ import { CollaboratorComponent } from './Component/collaborator/collaborator.com
     MatMenuModule,
     MatDialogModule,
     ImageCropperModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatChipsModule,
+    MatCheckboxModule,
+    DragDropModule,
+    MatDatepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

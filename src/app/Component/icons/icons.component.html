@@ -1,10 +1,121 @@
 <div *ngIf="isTrash == 'false'">
-    <button mat-button mat-icon-button matTooltip="Remind me">
+    <button mat-button mat-icon-button matTooltip="Remind me" mat-button [matMenuTriggerFor]="remindermenu">
         <mat-icon class="icons">
             add_alert
         </mat-icon>
     </button>
+    <mat-menu #remindermenu="matMenu">
+        <div class="mat-menu-content" style="width: 250px;">
+            <div style="display: flex; justify-content: space-between;" mat-menu-item (click)="AddReminder('today')">
+                <div>
+                    Later Today
+                </div>
+                <div>
+                    8:00 PM
+                </div>
+            </div>
+            <div style="display: flex; justify-content: space-between;" mat-menu-item (click)="AddReminder('today')">
+                <div>
+                    Tomorrow
+                </div>
+                <div>
+                    8:00 AM
+                </div>
+            </div>
+            <div style="display: flex; justify-content: space-between;" mat-menu-item (click)="AddReminder('nextWeek')">
+                <div>
+                    Next Week
+                </div>
+                <div>
+                    {{DateTime()}}, 8:00AM
+                </div>
 
+            </div>
+            <button mat-menu-item [matMenuTriggerFor]="pickDate">
+
+                Pick date & time
+
+            </button>
+            <mat-menu #pickDate="matMenu">
+                <div class="mat-menu-content" style="width: 220px;">
+                    <div style="padding: 10px;">
+                        Pick date & time
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div style="padding: 20px;">
+                        <mat-form-field style="width: 180px;">
+                            <input matInput [matDatepicker]="dp" [formControl]="date"
+                                (click)="$event.stopPropagation()">
+                            <mat-datepicker-toggle matSuffix [for]="dp">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #dp></mat-datepicker>
+                        </mat-form-field>
+                        <mat-divider></mat-divider>
+                        <div mat-menu-item>
+                            <div fxLayout="row">
+                                <input [matMenuTriggerFor]="pickTime" matInput [(ngModel)]="customReminderTime"
+                                    (click)="$event.stopPropagation()">
+                                <button mat-button mat-icon-button (click)="AddReminder('customTime')">
+                                    <mat-icon matSuffix class="matmaterialicon">done</mat-icon>
+                                </button>
+                            </div>
+
+                        </div>
+                        <mat-menu #pickTime="matMenu">
+                            <div class="mat-menu-content" style="width: 250px;">
+                                <div style="display: flex; justify-content: space-between;" mat-menu-item
+                                    (click)="AddReminder('today')">
+                                    <div>
+                                        Morning
+                                    </div>
+                                    <div>
+                                        8:00 AM
+                                    </div>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;" mat-menu-item
+                                    (click)="AddReminder('today')">
+                                    <div>
+                                        Afternoon
+                                    </div>
+                                    <div>
+                                        1:00 PM
+                                    </div>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;" mat-menu-item
+                                    (click)="AddReminder('nextWeek')">
+                                    <div>
+                                        Evening
+                                    </div>
+                                    <div>
+                                        6:00 PM
+                                    </div>
+
+                                </div>
+                                <div style="display: flex; justify-content: space-between;" mat-menu-item
+                                    (click)="AddReminder('nextWeek')">
+                                    <div>
+                                        Night
+                                    </div>
+                                    <div>
+                                        8:00 PM
+                                    </div>
+
+                                </div>
+                                <div style="display: flex; justify-content: space-between;" mat-menu-item
+                                    (click)="AddReminder('nextWeek')">
+                                        Custom
+                                </div>
+                            </div>
+                        </mat-menu>
+                        <mat-divider></mat-divider>
+                        <button mat-raised-button (click)="AddReminder('customDate')">Save</button>
+                    </div>
+
+                </div>
+            </mat-menu>
+        </div>
+
+    </mat-menu>
     <button mat-button mat-icon-button matTooltip="Collaborator" (click)="Collab()">
         <mat-icon class="icons">
             person_add
@@ -47,7 +158,16 @@
     </button>
     <mat-menu #menu="matMenu">
         <button mat-menu-item (click)=moveToTrash()>Delete note</button>
-        <button mat-menu-item>Add label</button>
+        <button mat-menu-item [matMenuTriggerFor]="labelmenu" (click)="GetLabels()">Add label</button>
+    </mat-menu>
+    <mat-menu #labelmenu="matMenu">
+        <button *ngFor="let label of result" mat-menu-item>
+
+            <mat-checkbox [checked]="CheckedLabels(label.id)" (click)="AddLabel(label)"
+                (click)="$event.stopPropagation()"></mat-checkbox>
+            {{label.label}}
+        </button>
+
     </mat-menu>
 </div>
 <div *ngIf="isTrash == 'true'">

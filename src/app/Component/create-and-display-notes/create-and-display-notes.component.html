@@ -1,4 +1,23 @@
 <div style="width: 100%;">
-    <app-create-note (addNoteEvent)="addNoteEvent($event)"></app-create-note>
-    <app-display-notes isTrash=false isArchive=false [notes]="allNotes"></app-display-notes>
+    <div>
+        <app-create-note (addNoteEvent)="addNoteEvent($event)"></app-create-note>
+    </div>
+    <div>
+        <p style="margin-left: 50px; margin-top: 20px;">Pinned</p>
+        <app-display-notes isTrash=false isArchive=false [notes]="allPinned" (NoteTrash)="getAllPinned()"
+            (NoteColor)="getAllPinned()" (NoteArchive)="getAllPinned()" (labelToNote)="getAllPinned()"
+            (NotePin)="getAllPinned()" (NotePin)="getAllNotes()" (removeLabelEvent)="getAllPinned()"
+            (removeLabel)="getAllPinned()" (reminderNote)="getAllPinned()" (removeReminder)="getAllPinned()">
+        </app-display-notes>
+    </div>
+    <div>
+        <p style="margin-left: 50px; margin-top: 20px;">Others</p>
+        <app-display-notes isTrash=false isArchive=false [notes]="allNotes" (NoteTrash)="getAllNotes()"
+            (NoteColor)="getAllNotes()" (NoteArchive)="getAllNotes()" (labelToNote)="getAllNotes()"
+            (NotePin)="getAllNotes()" (NotePin)="getAllPinned()" (removeLabelEvent)="getAllNotes()"
+            (removeLabel)="getAllNotes()" (reminderNote)="getAllNotes()" (removeReminder)="getAllNotes()">
+        </app-display-notes>
+    </div>
+
+
 </div>

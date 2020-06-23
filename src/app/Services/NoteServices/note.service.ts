@@ -17,6 +17,16 @@ export class NoteService {
     };
     return this.httpservice.GET('Notes', options);
   }
+  GetAllPinned() {
+    var token = localStorage.getItem("token")
+    const options = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.httpservice.GET('Notes/AllPin', options);
+  }
   CreateNote(data) {
     var token = localStorage.getItem("token")
     const options = {
@@ -118,5 +128,68 @@ export class NoteService {
       })
     };
     return this.httpservice.GET(`Notes/users?keyword=` + data, options)
+  }
+  SearchNotes(data) {
+    var token = localStorage.getItem("token");
+    const options = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.httpservice.GET('Notes?keyword=' + data, options)
+  }
+  AddCollaboration(id, data) {
+
+    var token = localStorage.getItem("token")
+    const options = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.httpservice.PUT('Notes/' + id + '/collaborate', data, options);
+  }
+  AddLabelToNote(data, noteId) {
+    var token = localStorage.getItem("token")
+    const options = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.httpservice.PUT('Notes/' + noteId, data, options);
+  }
+  PinNote(id, data) {
+
+    var token = localStorage.getItem("token")
+    const options = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.httpservice.PUT('Notes/' + id + '/Pinned', data, options);
+
+  }
+  RemoveLabel(noteId, labelId) {
+    var token = localStorage.getItem("token")
+    const options = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.httpservice.DELETE('Notes/' + noteId + '/removeLabel/' + labelId, options);
+  }
+  AddReminder(noteId, data) {
+    var token = localStorage.getItem("token")
+    const options = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.httpservice.PUT('Notes/' + noteId, data, options);
   }
 }

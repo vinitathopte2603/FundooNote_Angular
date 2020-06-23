@@ -9,6 +9,7 @@
     "experimentalDecorators": true,
     "module": "esnext",
     "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
     "importHelpers": true,
     "target": "es2015",
     "lib": [
@@ -16,6 +17,7 @@
       "dom"
     ]
   },
+  
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true

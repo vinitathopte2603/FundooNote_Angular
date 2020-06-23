@@ -9,7 +9,8 @@
     <div class="search" fxLayoutAlign="start center" fxFlex="50%" fxHide.xs="true">
       <mat-icon matPrefix style="margin-left: 10px;" style="color: black; padding: 15px;">search</mat-icon>
       <mat-form-field appearance="none" fxFlex="85%">
-        <input matInput placeholder="search" style="color: black; margin-top: 5px;" type="text" [(ngModel)]="value">
+        <input matInput placeholder="search" style="color: black; margin-top: 5px;" type="text"
+          (keyup)=searchNotes($event)>
       </mat-form-field>
       <div fxLayoutAlign="end center" style="margin-right: 10px;">
         <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
@@ -22,12 +23,14 @@
         <button mat-icon-button>
           <mat-icon>refresh</mat-icon>
         </button>
-        <button mat-icon-button *ngIf="status" (click)="status=!status">
+
+        <button mat-icon-button *ngIf="viewValue!=2 " (click)="ChangeView(2)">
           <mat-icon>grid_on</mat-icon>
         </button>
-        <button mat-icon-button *ngIf="!status" (click)="status=!status">
+        <button mat-icon-button *ngIf="viewValue==2" (click)="ChangeView(1)">
           <mat-icon appearance="outline">view_agenda</mat-icon>
         </button>
+
         <button mat-icon-button>
           <mat-icon>settings</mat-icon>
         </button>
@@ -37,7 +40,7 @@
         <button mat-icon-button>
           <mat-icon>apps</mat-icon>
         </button>
-        <div mat-card-avatar class="example-header-image" [matMenuTriggerFor]="menu"></div>
+        <div mat-card-avatar class="example-header-image" id="profileAvatar" [matMenuTriggerFor]="menu"></div>
         <div>
           <mat-menu #menu="matMenu" xPosition="before">
             <div fxLayout="column" fxLayoutAlign="center center" style="height: 250px; width: 280px;">
@@ -54,7 +57,7 @@
                   {{this.email}}
                 </p>
 
-                <button mat-raised-button (click)=Logout()>Logout</button>
+                <button mat-raised-button (click)=Logout() id="Logout">Logout</button>
               </div>
             </div>
 
@@ -83,13 +86,13 @@
 
         <div fxLayout="row" fxLayoutAlign="start center" *ngFor="let data of labels">
           <mat-icon matListIcon style="padding:10px 20px;">label_outline</mat-icon>
-          <a mat-list-item routerLink="reminder" disableRipple="true" 
+          <a mat-list-item routerLink="reminder" disableRipple="true"
             style="border-bottom-right-radius: 20px; border-top-right-radius: 20px;">{{data.label}}</a>
         </div>
 
         <div fxLayout="row" fxLayoutAlign="start center">
           <mat-icon matListIcon style="padding:10px 20px;">editoutlinedicon</mat-icon>
-          <a mat-list-item routerLink="home" disableRipple="true"  (click)=EditLabel(labels)
+          <a mat-list-item routerLink="home" disableRipple="true" (click)=EditLabel(labels)
             style="border-bottom-right-radius: 20px; border-top-right-radius: 20px;">Edit labels</a>
         </div>
         <div fxLayout="row" fxLayoutAlign="start center">

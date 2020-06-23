@@ -34,7 +34,7 @@ export class UserService {
     const options = {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + token,
-        // 'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded'
       })
     };
     return this.httpservice.PUT('Accounts/profilepicture', data, options);

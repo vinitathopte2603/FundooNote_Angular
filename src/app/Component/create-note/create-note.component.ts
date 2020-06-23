@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NoteService } from '../../Services/NoteServices/note.service';
+
 @Component({
   selector: 'app-create-note',
   templateUrl: './create-note.component.html',
@@ -11,6 +12,8 @@ export class CreateNoteComponent implements OnInit {
   collab: [];
   label: [];
   note: FormGroup;
+  result: any = [];
+  note1: any;
   @Output() addNoteEvent = new EventEmitter<any>();
 
   constructor(private formBuilder: FormBuilder, private noteService: NoteService) { }
@@ -22,6 +25,12 @@ export class CreateNoteComponent implements OnInit {
       labels: [],
       collaborators: []
     })
+    this.note1 = {
+      title: '',
+      description: '',
+      labels: [],
+      collaborators: []
+    }
   }
   AddNote() {
     let obj = this.note.value;
@@ -29,7 +38,7 @@ export class CreateNoteComponent implements OnInit {
     obj.collaborators = []
     this.noteService.CreateNote(obj).subscribe(response => {
       this.addNoteEvent.emit();
-
+      this.note.reset();
     })
   }
 }

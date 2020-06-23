@@ -10,6 +10,7 @@ import { CreateAndDisplayNotesComponent } from './Component/create-and-display-n
 import { ReminderNotesComponent } from './Component/reminder-notes/reminder-notes.component';
 import { ArchiveNotesComponent } from './Component/archive-notes/archive-notes.component';
 import { TrashNotesComponent } from './Component/trash-notes/trash-notes.component';
+import { SearchNoteComponent } from './Component/search-note/search-note.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
       { path: 'reminder', component: ReminderNotesComponent },
       { path: 'archive', component: ArchiveNotesComponent },
       { path: 'trash', component: TrashNotesComponent },
+      { path: 'search', component: SearchNoteComponent }
     ]
   }
 ];

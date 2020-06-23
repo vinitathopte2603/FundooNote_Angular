@@ -1,24 +1,53 @@
-<div fxLayout="column" fxLayoutAlign="space-around start">
+<div fxLayout="column" fxLayoutAlign="space-around start" style="width: 500px;">
   <div>Collaborators </div>
 
 
   <div style="padding-top:2%;" fxLayout="row" fxLayoutAlign="start center">
-    <mat-icon>person_add</mat-icon>
+
     <!-- {{emailId}} -->
     <div style="padding-left:2%;">
 
       <!-- {{collabUser.emailId}} -->
     </div>
-    <div style="padding-left:5%;padding-bottom: 1%;">
-      <input matInput placeholder="Person or email to share with" [(ngModel)]="collab" (keyup)=getAllUsers(collab)>
-    </div>
-    <div *ngFor="let user of users">
-      <div>
-        {{user.email}}
+    <div fxLayout="column" fxLayoutAlign="start center">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon>person_add</mat-icon>
+        {{this.email}}(owner)
       </div>
-     
-    </div>
+      <div *ngFor="let useremail of data.collaborations">
+        {{useremail.email}}
+        <button mat-button mat-icon-button>
+          <mat-icon matSuffix class="matmaterialicon">close</mat-icon>
+        </button>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon>person_add</mat-icon>
+        <div style="padding-left:5%;padding-bottom: 1%;" >
+          <input matInput placeholder="Person or email to share with" [(ngModel)]="collab" (keyup)=getAllUsers(collab)
+          [matMenuTriggerFor]="menu"
+          (keyup)="openMyMenu()">
+        </div>
+      </div>
+    
+      <div style="padding: 12px;">
+        <mat-menu #menu="matMenu" overlapTrigger="false" >
+          <div *ngFor="let user of users" matMenuContent style="padding-left: 8px; padding-right: 8px; padding-top: 8px;">
+            {{user.email}}
+            <button mat-button mat-icon-button (click)=Collaborte(user)>
+              <mat-icon matSuffix class="matmaterialicon">done</mat-icon>
+            </button>
+          </div>
+        </mat-menu>
+      </div>
+      
 
+      <div *ngFor="let email of collabEmails">
+        {{email.emails}}
+        <button mat-button mat-icon-button (click)=RemoveCollaborte(email)>
+          <mat-icon matSuffix class="matmaterialicon">close</mat-icon>
+        </button>
+      </div>
+    </div>
   </div>
   <mat-divider></mat-divider>
   <div fxLayout="row">
@@ -26,7 +55,7 @@
     <button mat-button routerLink="/dashboard/note">Cancel</button>
 
 
-    <button mat-button (click)="addCollab()">Save</button>
+    <button mat-button (click)="AddCollab()">Save</button>
 
   </div>
 </div>

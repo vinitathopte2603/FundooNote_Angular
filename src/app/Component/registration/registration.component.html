@@ -18,7 +18,7 @@
               <div fxLayout="row" fxLayoutAlign="space-between center" >
                 <mat-form-field fxFlex=45 appearance="outline">
                     <mat-label>First Name</mat-label>
-                    <input matInput placeholder="first name" name="firstName" formControlName="firstName"
+                    <input matInput placeholder="first name" id="firstName" name="firstName" formControlName="firstName"
                       [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" required>
                     <mat-icon matSuffix>account_circle</mat-icon>
                     <mat-error *ngIf="register.hasError('required', ['firstName'])">
@@ -28,7 +28,7 @@
                   </mat-form-field>
                   <mat-form-field fxFlex=45  appearance="outline">
                     <mat-label>Last Name</mat-label>
-                    <input matInput placeholder="last name" formControlName="lastName" 
+                    <input matInput placeholder="last name" id="lastName" formControlName="lastName" 
                      name="lastName" required >
                       <mat-icon matSuffix>account_circle</mat-icon>
                     <mat-error *ngIf="register.hasError('required', ['lastName'])">
@@ -40,7 +40,7 @@
             <div fxLayout="column" fxLayoutAlign="center">
               <mat-form-field appearance="outline">
                 <mat-label>Email Id</mat-label>
-                <input matInput placeholder="emailId" name="emailiId" formControlName="email"
+                <input matInput placeholder="emailId" id="Email" name="emailiId" formControlName="email"
                   [ngClass]="{ 'is-invalid': submitted && f.email.errors }" required>
                 <mat-icon matSuffix>email</mat-icon>
                 <mat-error *ngIf="register.hasError('required', ['email'])">
@@ -52,7 +52,7 @@
               </mat-form-field>
               <mat-form-field appearance="outline">
                 <mat-label>password</mat-label>
-                <input matInput placeholder="Password" formControlName="passwrod" [type]="hide ? 'password' : 'text'"
+                <input matInput placeholder="Password" id="password" formControlName="passwrod" [type]="hide ? 'password' : 'text'"
                   type="password" name="passwrod" required [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
                 <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}
                 </mat-icon>
@@ -66,7 +66,7 @@
             </div>
             <div fxFlex="45" fxLayout="row" fxLayoutAlign="start center">
             <mat-button-toggle-group name="Type" appearance="legacy" aria-label="Font Style" formControlName="type">
-              <mat-button-toggle value="Basic">Basic</mat-button-toggle>
+              <mat-button-toggle id="basicbtn" value="Basic">Basic</mat-button-toggle>
               <mat-button-toggle value="Advance">Advance</mat-button-toggle>
             </mat-button-toggle-group>
           </div>
@@ -82,7 +82,7 @@
       <mat-card-actions>
        
         <mat-card-actions fxLayout="row" fxLayoutAlign="space-between center" style="margin-bottom: 5px;">
-          <button mat-raised-button style="margin-right: 2px;" class="buttonCss" (click)=registrationForm() >Register</button>
+          <button mat-raised-button style="margin-right: 2px;" id="register" class="buttonCss" (click)=registrationForm() >Register</button>
           <button mat-raised-button class="buttonCss" style="margin: 0 0;" routerLink='/login'>Login</button>
         </mat-card-actions>
       </mat-card-actions>

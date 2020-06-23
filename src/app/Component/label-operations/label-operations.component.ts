@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { LabelService } from '../../Services/Labels/label.service';
+import { LabelService } from '../../Services/LabelServices/label.service';
 @Component({
   selector: 'app-label-operations',
   templateUrl: './label-operations.component.html',
@@ -40,7 +40,6 @@ export class LabelOperationsComponent implements OnInit {
       label: labelData.label
     }
     this.labelService.EditLabel(data, labelData.id).subscribe(response => {
-
 
     }
 

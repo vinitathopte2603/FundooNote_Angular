@@ -43,18 +43,20 @@ export class ProfilePictureComponent implements OnInit {
     console.log('event is ', event);
 
     this.croppedImage = event
-    // this.profilepicture = <File>event.file;
-    this.profilepicture = this.croppedImage;
+    
+    this.profilepicture = event.file;
+    // this.profilepicture = this.croppedImage;
     console.log("here", this.profilepicture);
   }
   setProfilePicture() {
     // this.dataService.changeMessage('app Note')
     // console.log("image is", this.uploadForm.get('file').value)
-    const imageFile = new FormData();
-    imageFile.append('ImageUrl', this.profilepicture)
-    console.log("profile", this.profilepicture);
 
-    this.userService.ProfilePicture(imageFile).subscribe(
+    console.log("profile", this.profilepicture);
+    const formData: FormData = new FormData();
+    formData.append('ImageUrl', this.profilepicture)
+
+    this.userService.ProfilePicture(formData).subscribe(
       (response: any) => {
 
         console.log(response);

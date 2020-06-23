@@ -1,24 +1,72 @@
-<div style="margin-top: 20px; margin-left: 50px; width: 96%;" fxLayout="row wrap" fxLayoutGap="10px"
-  fxLayoutAlign="start center" fxLayoutAlign.xs="center center">
-  <div fxFlex='280px' fxFlex.xs='100' *ngFor="let items of notes">
-    <mat-card style="margin-top: 10px;" fxFlex="100%" [style.backgroundColor]='items.color'>
-      <form>
-        <mat-card-content (click)=EditNote(items)>
+<div cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">
+    <div [ngClass]="{
+  'gridView': view=='1',
+  'listView': view=='2'
+}">
 
-          <div *ngIf="items.image!=null">
-            <img style="width: 100%;" src="{{items.image}}">
-          </div>
+      <div [ngClass]="{
+    'gridViewCard':view=='1',
+    'listViewCard':view=='2'
+  }" fxFlex.xs='100' *ngFor="let items of notes" cdkDrag>
+
+        <mat-card style="margin-top: 10px;" fxFlex="100%" [style.backgroundColor]='items.color'>
+          <form>
+            <mat-card-content>
+              <div fxLayout="row" fxLayoutAlign="end center">
+                <div style="position: absolute">
+                  <button mat-button mat-icon-button (click)="pinNote(items)">
+                    <img style="width: 20px;" src="../../../assets/Images/pin.svg" *ngIf="!items.isPin" />
+                    <img style="width: 20px;" *ngIf="items.isPin" src="../../../assets/Images/unpin.svg" />
+                  </button>
+
+                </div>
+              </div>
+              <div *ngIf="items.image!=null">
+                <img style="width: 100%;" src="{{items.image}}">
+              </div>
+              <div (click)=EditNote(items)>
+                <div>
+                  {{items.title}}
+                </div>
+                <div>
+                  {{items.description}}
+                </div>
+              </div>
+
+              <div>
+                <mat-chip-list #chipList aria-label="Fruit selection">
+                  <mat-chip *ngFor="let label of items.labels" [selectable]="selectable" [removable]="removable"
+                    (removed)="remove(items.id,label)">
+                    {{label.label}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+
+                </mat-chip-list>
+
+              </div>
+              <div>
+                <mat-chip class="show" *ngIf="items.reminder!=null" [removable]="removable"
+                  style="max-width: 200px; margin-top: 13px; padding: 4px; border-radius: 13px;line-height: 3; opacity: .50;">
+                  <mat-icon>alarm</mat-icon>
+                  {{items.reminder | date :'dd MMM yy h:mm a'}}
+                  <mat-icon class="hide" matChipRemove *ngIf="removable" (click)="RemoveLabel(items)">
+                    cancel</mat-icon>
+                </mat-chip>
+              </div>
+              <div fxLayout="row" style="padding: 10px;">
+                <div *ngFor="let collabs of items.collaborations" style="padding: 5px;">
+                  <mat-icon matTooltip={{collabs.email}}>account_circle</mat-icon>
+
+                </div>
+              </div>
+            </mat-card-content>
+          </form>
           <div>
-            {{items.title}}
+            <app-icons (NoteTrashEvent)="moveToTrash()" (NoteArchiveEvent)="moveToArchive()"
+              (LabelEvent)="labelOnNote()" (reminderEvent)="Reminder()" (ColorEvent)="ColorNote()" [isTrash]="isTrash"
+              [isArchive]="isArchive" [noteData]="items"></app-icons>
           </div>
-          <div>
-            {{items.description}}
-          </div>
-        </mat-card-content>
-      </form>
-      <div>
-        <app-icons [isTrash]="isTrash" [isArchive]="isArchive" [noteData]="items"></app-icons>
+        </mat-card>
       </div>
-    </mat-card>
+    </div>
   </div>
-</div>
