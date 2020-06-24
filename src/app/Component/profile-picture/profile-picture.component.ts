@@ -16,8 +16,9 @@ export class ProfilePictureComponent implements OnInit {
   croppedImage: any = '';
   // file1: any
   profilepicture: any = '';
+  finalFile;
   constructor(public dialogRef: MatDialogRef<DashBoardComponent>,
-    @Inject(MAT_DIALOG_DATA) public data, private userService: UserService, private formBuilder: FormBuilder, ) { }
+    @Inject(MAT_DIALOG_DATA) public data, private userService: UserService, private formBuilder: FormBuilder,) { }
 
   ngOnInit(): void {
     // this.uploadForm = this.formBuilder.group({ file: [''] });
@@ -26,6 +27,8 @@ export class ProfilePictureComponent implements OnInit {
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
     this.profilepicture = <File>event.target.files[0];
+    console.log('on select file is ', this.profilepicture);
+
 
 
     // if (this.imageChangedEvent.target.files.length > 0) {
@@ -43,18 +46,17 @@ export class ProfilePictureComponent implements OnInit {
     console.log('event is ', event);
 
     this.croppedImage = event
-    
-    this.profilepicture = event.file;
     // this.profilepicture = this.croppedImage;
     console.log("here", this.profilepicture);
+    this.finalFile = new File([event.file], this.profilepicture.name,{type:this.profilepicture.type});
   }
   setProfilePicture() {
     // this.dataService.changeMessage('app Note')
     // console.log("image is", this.uploadForm.get('file').value)
 
-    console.log("profile", this.profilepicture);
+    console.log("profile", this.finalFile);
     const formData: FormData = new FormData();
-    formData.append('ImageUrl', this.profilepicture)
+    formData.append('ImageUrl', this.finalFile)
 
     this.userService.ProfilePicture(formData).subscribe(
       (response: any) => {

@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'forgotpassword', component: ForgotPasswordComponent },
   { path: 'resetpassword/:token', component: ResetPasswordComponent },
   {
-    path: 'u/0', component: DashBoardComponent, canActivate: [AuthGuardService],
+    path: 'u/0', component: DashBoardComponent,
 
     children: [
       { path: 'u/0', redirectTo: 'home', pathMatch: 'full' },
